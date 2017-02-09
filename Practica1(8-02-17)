@@ -1,0 +1,55 @@
+# Series-de-Tiempo-
+#? Obtener ayuda de un comando epecifíco
+#?? Para buscar documentación en R sobre un comando en específico 
+#R Almacena datos en forma de objetos 
+#ls lista de objetos
+#<-/=para asignar objetos 
+
+x <-1:25
+x
+mean(x)
+y<- 2:19
+ls()
+x2<-(c(2,7,8,9,7,8,9,10))
+x3<-c(2,3.2,3.3,3.4,5,6,7,8,9)
+y<-seq(8,80,4)
+z<-seq(100,200,10)
+z
+length(z)
+mean(x)
+media<-sum(x)/length(x)
+?sum
+sum(5+3i,8+4i)
+#Para eliminar las variables seleccionadas 
+rm(x)
+ls()
+#Para eliminar todas las variables 
+rm(list = ls())
+ls()
+nse<- c("alto", "medio", "bajo")
+amigos <-c("Maria", "Paco", "Leo", "Luli", "Gaby", "Marko", "Rodrigo", "Julio", "Leslie", "Gema")
+x<- rnorm(100)
+x
+plot(x)
+b<- (1:100)
+b
+plot(b,x)
+y=x+rnorm(100, mean=50, sd=.5)
+cor(x,y)
+mean(y)
+var(y)
+sd(y)
+sqrt(var(y))
+
+#Operadores relacionales 
+#<,>,>=, <=, ==,!=
+8==7.9999999999999999
+x<-17
+x=17
+#Operaciones lógicas 
+#"&" Intersección 
+#"|" Union 
+
+b<-2
+a <- 1
+(a<b) & (a<3)
