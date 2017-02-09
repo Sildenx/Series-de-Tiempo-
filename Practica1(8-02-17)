@@ -53,3 +53,16 @@ x=17
 b<-2
 a <- 1
 (a<b) & (a<3)
+
+b<-2
+a <- 1
+(a<b) & (a<3)
+
+install.packages("foreign")
+install.packages("readxl")
+require(readxl)
+library(readxl)
+rates <- read_excel("C://Users//Sala-F18//Downloads//rates.xlsx")
+#Declaramos como serie de tiempo 
+rates.ts<- ts(rates, frequency = 1, start = (1))
+plot(rates.ts, ylab="Rates", xlab="Periodo", main = "Paridad: peso/dolar", col=2)
