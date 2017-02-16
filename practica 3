@@ -1,0 +1,37 @@
+# Series-de-Tiempo-
+install.packages("forenig")
+require(foreign)
+install.packages("readxl")
+library(readxl)
+petroleo <- read_excel("C://Users//Sala-F18//Downloads//petroleo.xlsx")
+petroleo.ts <- ts(petroleo)
+plot(petroleo.ts, main= "serie de tiempo ", xlab="precio", ylab="tiempo")
+?decompose
+petroleo.ts=ts(petroleo, frequency = 5)
+install.packages("decompose")
+require(decompose)
+petroleo.descom <- decompose(petroleo.ts, type = "additive")
+plot(petroleo.descom)
+#GRAFICOS 
+plot(as.ts(petroleo.descom$seasonal))
+plot(as.ts(petroleo.descom$trend))
+plot(as.ts(petroleo.descom$random))
+plot(petroleo.descom)
+
+?as.ts
+windows()#para graficar con mejor vision 
+par(mfrow=c(3,1))
+       #$seasonal
+       #$trend 
+       #random 
+plot(diff(petroleo.descom))
+
+
+gdpmexico <- read_excel("C://Users//Sala-F18//Downloads//gdpmexico.xlsx")
+gdpmexico.ts <- ts(gdpmexico)
+gdpmexico.ts=ts(gdpmexico, frequency = 5)
+gdpmexico.descom <- decompose(gdpmexico.ts, type="multiplicative")
+plot(gdpmexico.descom)
+ 
+
+import <- read_excel()
