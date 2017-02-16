@@ -14,7 +14,7 @@ IPCts <- ts(IPC, frequency = 3, start = 1)
 
 #..............................Gráfica de la serie de tiempo.......................
 
-plot(IPCts, ylab=" Precio de cierre ", xlab="Tiempo", main="Precio de cierre diario del IPC del 16/02/16 al 16/02/16", col=50)
+plot(IPCts, ylab=" Precio de cierre ", xlab="Intervalo", main="Precio de cierre diario del IPC del 16/02/16 al 16/02/16", col=50)
 
 #.......................... Descomposición de la serie de tiempo....................
 
