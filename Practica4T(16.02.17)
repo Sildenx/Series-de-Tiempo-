@@ -1,0 +1,28 @@
+# Series-de-Tiempo-
+install.packages("foreign")
+require(foreign)
+install.packages("readxl")
+require(readxl)
+
+
+#...............................Descarga de la base de datos ......................
+IPC <- read_excel("C://Users//DENN//Downloads//IPC.xlsx")
+
+#...............................Declaración como serie de tiempo...................
+
+IPCts <- ts(IPC, frequency = 3, start = 1) 
+
+#..............................Gráfica de la serie de tiempo.......................
+
+plot(IPCts, ylab=" Precio de cierre ", xlab="Tiempo", main="Precio de cierre diario del IPC del 16/02/16 al 16/02/16", col=50)
+
+#.......................... Descomposición de la serie de tiempo....................
+
+IPCtsdc <- decompose(IPCts, type = "additive")
+
+#............................Gráfica de la descomposición de la serie...............
+
+plot(IPCtsdc)
+plot(as.ts(IPCtsdc$seasonal))
+plot(as.ts(IPCtsdc$trend))
+plot(as.ts(IPCtsdc$random))
