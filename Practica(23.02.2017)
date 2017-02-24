@@ -1,0 +1,41 @@
+# Series-de-Tiempo-
+install.packages("foreign")
+require(foreign)
+
+install.packages("readxl")
+require (readxl)
+base <- read_excel("C://Users//Sala-F18//Downloads//base.xlsx")
+#" version 5-12 stata , hay que mantener actualizado R para cargar bases en stata "
+
+?lm
+View(base)
+#Muestra representativa de una muestra representativa 
+#Con la logaritmica se disminuye la covarianza  entre los datos 
+#Regresion lineal 
+#Guardar el modelo con una nueva variable 
+
+base.lm <- lm(peso~ talla, base)
+
+#Extraemos los coeficientes betas 
+betas=coefficients(base.lm); betas
+
+# Por cada unidad aumentada en la talla  , el peso aumenta 1.894393
+summary(base.lm)$r.squared
+
+# .78 de la variacion en y esta explicado por x 
+
+#Prueba F 
+#Puede establecerse si existe alguna asociacion significativa entre y y x bajo la hipótesis nula de que 
+#B (beta ) es distinto dfe cero.
+
+# Si F es menor  a .05 se rechaza la hipótesis nula 
+summary(base.lm)
+
+#Valores predichos IC95%
+predict(base.lm,base, interval = "predict", level = .95)
+
+#Gráfico de residuos 
+
+residuos <- residuals(base.lm)
+plot(jitter(residuos)~jitter(talla), ylab = "Residuos", xlab="Talla", data = base)
+abline(0,0, col="red")
