@@ -46,3 +46,5 @@ ejemplo.tend
 
 lines(ejemplo.stl, )
 mothplot
+
+summary(ejemplo.tend) <--- Media 
