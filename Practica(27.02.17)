@@ -1,0 +1,48 @@
+# Series-de-Tiempo-
+install.packages("foreign")
+require(foreign)
+
+install.packages("readxl")
+require(readxl)
+install.packages("tseries")
+require(tseries)
+ejemplo <- read_excel("C://Users//Sala-F18//Downloads//ejemplo.xlsx")
+
+View(ejemplo)
+
+ejemplo.ts <- ts(ejemplo, start = c(2012, 1), frequency = 6)
+plot(ejemplo.ts, xlab="Periodo de tiempo", ylab="ventas en millones ", main="Ventas en millones ", col=35)
+ejemplodescom <- decompose(ejemplo.ts, "additive")
+plot(ejemplodescom)
+cycle(ejemplo.ts)
+
+#Detectando patrón estacional 
+
+boxplot(ejemplo.ts ~ cycle(ejemplo.ts))
+
+plot(as.ts(ejemplodescom$seasonal))
+plot(as.ts(ejemplodescom$trend))
+plot(as.ts(ejemplodescom$random))
+plot(ejemplodescom)
+
+
+
+par(mfrow=c(1,3))
+plot(ejemplodescom$seasonal)
+plot(ejemplodescom$trend)
+plot(ejemplodescom$random)
+# Extraer tendencia (Tt) con el método loose, funcion (stl )
+ejemplo1.ts <- ts(ejemplo[1:24,1], frequency = 6, start = c(2012,1))
+View(ejemplo1.ts)
+class(ejemplo1.ts)
+
+ejemplo.stl <- stl(ejemplo1.ts, s.window = "periodic")
+names( ejemplo.stl)
+ejemplo.stl # <--- Valor aproximado de cada uno de los componentes 
+
+ ejemplo.tend <- ejemplo.stl$time.series[,2]
+ejemplo.tend
+ 
+
+lines(ejemplo.stl, )
+mothplot
