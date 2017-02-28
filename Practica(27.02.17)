@@ -48,3 +48,23 @@ lines(ejemplo.stl, )
 mothplot
 
 summary(ejemplo.tend) <--- Media 
+mothplot
+
+summary(ejemplo.tend)
+#Regresion con series de tiempo Y(t) y una variable predictora (xt)
+#Funacion (tslm )
+#Se utiliza para adaptar modelos lineales a series temporales incluytendo componentes de 
+#tslm( Formula, data, subset, lamda=NULL, biasadj=FALSE, ...)
+
+library(readxl)
+
+indicators <- read_excel("C://Users//Sala-F18//Downloads//indicators.xlsx")
+ install.packages("forecast")
+ library(forecast)
+ 
+ ?tslm 
+ 
+ indicators.ts <- ts (gdp, data = indicators)
+ indicators.ts <- ts(co2, data=indicators)
+ View(indicators.ts)
+ plot(indicators.ts)
