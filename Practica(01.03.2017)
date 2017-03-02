@@ -1,0 +1,44 @@
+# Series-de-Tiempo-
+install.packages("readxl")
+require(readxl)
+
+ejemplo <- read_excel("C://Users//Sala-F18//Downloads//ejemplo3.xlsx")
+
+#decompose()
+#stl()
+
+indi <- read_excel("C://Users//Sala-F18//Downloads//indicators.xlsx")
+install.packages("forecast")
+require(forecast)
+
+View(indi)
+
+
+indi.ts <- ts(gdp_capita, data = indi)
+
+indi.ts <- ts(co2, data = indi)
+
+plot(indi.ts)
+#el tiempo debe empezar de cero 
+
+
+estimado.ts <- tslm (gdp_capita ~ co2, data=indi.ts)
+summary(estimado.ts)
+
+plot( gdp_capita ~ co2, data = indi.ts, ylab = "Producto interno bruto", xlab="Toneladas de CO2")
+
+#Funcion no lineal (log- log) 
+par(mfrow=c(1,2))
+estimado.ts2 <- lm(log(indi$gdp_capita)~ log(co2), data=indi.ts)
+summary(estimado.ts2)
+plot(jitter(gdp_capita)~ jitter(co2), xlab="Toneladas de Co2", ylab = "Gross Domestic Product", data = indi.ts)
+lines(1:54, exp(estimado.ts2$coefficients[1]+ estimado.ts2$coefficients[2]*log(1:54)))
+
+plot(log(jitter(gdp_capita))~log(jitter(co2)), xlab="log(co2)", ylab="logGDp", data=indi.ts)
+abline(estimado.ts2, col="red")
+
+#Residuos log- log 
+residuos.log <- residuals(estimado.ts2)
+plot(jitter(residuos.log, amount = .005)~ jitter (log(co2)), ylab = "Residuos", xlab="log(co2", data = indicators.ts, col="blue")
+
+#Ejemplos 
