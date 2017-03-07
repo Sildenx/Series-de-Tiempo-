@@ -1,0 +1,3 @@
+# Series-de-Tiempo-
+plot(consumop.ts, col="blue", main="consumo de")
+lines (ablines)
