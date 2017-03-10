@@ -1,0 +1,28 @@
+
+
+#09/03/17
+
+ventas <- read_excel("C://Users//Sala-F18//Downloads//ma_r (1).xlsx")
+ventas.ts <- ts(ventas, start = c(1990))
+
+ma(ventas.ts, order=3)
+ma (ventas.ts, order=5)
+ma(ventas.ts, order=7)
+ma(ventas.ts, order=9)
+
+plot(ventas.ts, main="Ventas de empresa x", ylab="Año")
+lines(ma(ventas.ts,3), col="red")
+lines(ma(ventas.ts,5), col=3)
+lines(ma(ventas.ts,7), col=14)
+lines(ma(ventas.ts,9), col=13)
+#Promedios móviles de los promedios móviles 
+#Promedios móviles centrales 
+
+ventas.ts2 <- window(ventas.ts, start=1990)
+ma4 <- ma(ventas.ts2, order=4, centre = FALSE)
+ma4x2 <- ma(ventas.ts2, order=4, centre = TRUE)
+
+plot(ventas.ts2, main="Ventas d ela empresa x ", ylab="Toneladas", xlab="Año")
+
+lines(ma4, col="blue")
+lines(ma4x2, col="red")
