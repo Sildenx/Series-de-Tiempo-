@@ -1,0 +1,25 @@
+install.packages("forecast")
+require(forecast)
+install.packages("fpp")
+require(fpp)
+install.packages("readxl")
+library(readxl)
+
+ventas <- read_excel("C://Users//Sala-F18//Downloads//ejemplo3 (1).xlsx")
+
+ ventas1.ts <- ts(ventas1.ts, start = c(2010,1), frequency = 12)
+ 
+ plot(ventas1.ts, xlab="Tiempo", ylab="Ventas en millones", main="Series de ventas en millones ")
+ 
+ #Método de la media (Average method )
+ 
+meanf(ventas1.ts, 10)
+
+
+#Naive Method; si utilizas este modelo implica que la serie tiene estacionalidad  
+help(rwf)
+rwf(ventas1.ts, 10)
+
+naive(ventas1.ts,10)
+
+snaive(ventas1.ts, 10)
