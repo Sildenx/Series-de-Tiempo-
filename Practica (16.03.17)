@@ -1,0 +1,66 @@
+install.packages("forecast")
+require(forecast)
+install.packages("fpp")
+require(fpp)
+install.packages("readxl")
+library(readxl)
+
+ventas <- read_excel("C://Users//Sala-F18//Downloads//ejemplo3 (1).xlsx")
+
+ ventas1.ts <- ts(ventas1.ts, start = c(2010,1), frequency = 12)
+ 
+ plot(ventas1.ts, xlab="Tiempo", ylab="Ventas en millones", main="Series de ventas en millones ")
+ 
+ #Método de la media (Average method )
+ 
+meanf(ventas1.ts, 10)
+
+
+#Naive Method; si utilizas este modelo implica que la serie tiene estacionalidad  
+help(rwf)
+rwf(ventas1.ts, 10)
+
+naive(ventas1.ts,10)
+
+snaive(ventas1.ts, 10)
+
+# Deriva 
+
+rwf(ventas1.ts, 10, drift = TRUE)
+
+ventas.tsp <- window(ventas1.ts, start=c(2010,1), frequency=12)
+ventas.meanf <- meanf(ventas1.ts, h=20)
+ventas.naive <- naive(ventas1.ts, h=20)
+ventas.snaive <- snaive(ventas1.ts, h=20)
+
+plot(ventas.meanf, plot.conf=FALSE, main = "Pronosticos del valor de ventas ")
+
+# el signode pesos significa variables temporal 
+
+lines(ventas.naive$mean, col=2)
+lines(ventas.snaive$mean, col=3)
+
+legend("top.left", lyt=2, col=c(4,2,3), legend = c("Método de la media", "Método Naive", "Método snaive"))
+
+
+#Pronostico del valor de ventas
+
+
+
+#EJERCICIO DE PRONÓSTICO 
+
+serieipc <- read_excel("C://Users//Sala-F18//Downloads//ipc.xlsx")
+ipcts <- ts(serieipc, start = c(2010,1), frequency = 2)
+plot(ipcts, xlab="Semestres", ylab="IPC ", main="Valor del IPC a través del tiempo")
+
+meanf(ipcts,2)
+rwf(ipcts, 2)
+naive(ipcts, 2)
+snaive(ipcts, 2)
+
+rwf(ipcts,2, drift = TRUE)
+
+ipc.tsp <- window(ipcts, start=c(2010,1), frequency=2)
+ipc.meanf <- meanf(ipcts, h=2)
+ipc.naive <- naive(ipcts, h=2)
+ipc.snaive <- snaive(ipcts, h=2)
