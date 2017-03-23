@@ -1,0 +1,45 @@
+install.packages("foreign")
+require(foreign)
+install.packages("readxl")
+require(readxl)
+bas <- read_excel("C://Users//Sala-F18//Downloads//base.xlsx")
+
+install.packages("forecast")
+require(forecast)
+
+
+plot(jitter(consumo)~ jitter(ingresos), xlab="Ingresos", ylab="Consumo", data = bas)
+help("plot")
+
+#Supongamos que el archivo tiene una extension dat, redacta script para tranformar objeto en R
+
+estimado<- lm(consumo~ ingresos , data = bas)
+abline(estimado, col="red")
+summary(estimado)
+
+
+
+#Residuos 
+
+residuos <- residuals(estimado)
+
+plot(jitter(residuos)~jitter(ingresos), ylab="Residuos", xlab="Ingresos", data = bas)
+abline(0,0, col="red")
+
+#Pronósticos con regresión 
+fitted(estimado)[1]
+
+pronosticos <- forecast(estimado, newdata = data.frame(ingresos=500))
+plot(pronosticos, xlab = "x", ylab = "y")
+help("fitted")
+help(forecast)
+
+
+#Hacer la funcion log para reducir la varianza. 
+#TAREA 
+
+
+par(mfrow=c(1,2))
+estimado1 <- lm(log( consumo)~ log(ingresos), data=bas)
+#Dos gráficos lin - lin ; log -log 
+# Averiguar 
