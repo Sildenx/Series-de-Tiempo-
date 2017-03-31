@@ -1,0 +1,46 @@
+
+install.packages("forecast")
+require(forecast)
+install.packages("foreign")
+require(foreign)
+install.packages("readxl")
+require(readxl)
+install.packages()
+
+multiple <- read_excel("C://Users//Sala-F18//Downloads//multiple.xlsx")
+#Matriz de dispersión: Muestra la relacion entre las variables. Gráfica la correlación 
+pairs(multiple, (1:5))
+multiple.log <- data.frame(indice=multiple$indice,log.ahorro=log(multiple$ahorro+1),log.ingreso=log(multiple$ingreso+1),log.bienes=log(multiple$bienes+1), log.servicios=log(multiple$servicios))
+
+pairs(multiple.log[,1:5])
+
+estimado <- lm(indice~ log.ahorro +log.ingreso +log.bienes +log.servicios, data=multiple.log)
+
+#Valorar la significancia de las variables 
+summary(estimado)
+
+estimado<- step(lm(indice~log.ahorro+log.ingreso+log.bienes+log.servicios+log.bienes, data=multiple.log))
+summary(estimado1)
+
+#Modelo nulo 
+#Modelo saturado 
+
+plot(fitted(estimado), multiple.log$indice, ylab="Indice", xlab="Indice predicho")
+
+cv(estimado)
+#Residuos- predictores 
+
+estimado <- lm(indice~ log.ahorro+ log.ingreso+ log.bienes+ log.servicios, data=multiple.log)
+
+par(mfrow=c(2,2))
+plot(multiple.log$log.ahorro, residuals(estimado), xlab="log(ahorros)")
+plot(multiple.log$log.ingreso, residuals(estimado), xlab = "log(ingresos)")
+plot(multiple.log$log.bienes, residuals(estimado), xlab = "log(bienes)")
+plot(multiple.log$log.servicios, ersiduals(estimado), xlab="log(serivios")
+
+
+#Residuos - valores predichos 
+plot(fitted(estimado), residuals(estimado), xlab="Indice predicho ", ylab="Residuos")
+
+#estudiar decompose y stl 
+
